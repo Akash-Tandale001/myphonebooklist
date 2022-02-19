@@ -24,12 +24,13 @@ const updateContact=async(req,res)=>{
 
 }
 const delectContact=async(req,res)=>{
-    const data = await contact.findById(req.param.id);
+    const data = await contact.findById(req.params.id);
     if(!data){
         res.status(400);
     }
-    await contact.deleteOne(data);
+    await data.remove();
     res.status(200).json("Contact is removed successfully");
+    // res.status(200).json({message :`Deleted contact ${req.params.id}`})
 }
 
 

@@ -7,14 +7,14 @@ import image from "./image/contact.png";
 import Addcontactpopup from "./components/Addcontactpopup";
 
 function App() {
-  const [name, setName] = useState();
+  const [name, setName] = useState("");
   const [data, setData] = useState([]);
 
   const fetchdata = async () => {
     const respose = await axios.get("http://localhost:5000/api/");
     setData(respose.data);
   };
-  console.log(data);
+  // console.log(data);
   useEffect(() => {
     fetchdata();
   }, []);
@@ -31,10 +31,7 @@ function App() {
           onChange={(e)=>setName(e.target.value)}
         />
 
-        <div className="btn-section">
-          <button className="btn">
-            <i className="fa-solid fa-magnifying-glass "></i>Search
-          </button>
+        <div className="btn-section">          
           <button
             className="btn "
             type="button"
@@ -47,10 +44,15 @@ function App() {
         </div>
         <div className="count">Total Contact : {data.length}</div>
         <div className="contactSection">
-          {data.map((value) => {
+          {data.filter((val)=>{
+            if(name == "") {return val}
+            else if(val.firstname.toLowerCase().includes(name.toLowerCase()) || val.lastname.toLowerCase().includes(name.toLowerCase()) ){
+              return val
+            }
+          }).map((value ) => {
             return (
               <Contactinfo
-                key={value.id}
+                id={value._id}
                 firstname={value.firstname}
                 lastname={value.lastname}
                 email={value.email}

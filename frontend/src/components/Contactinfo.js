@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 import Updatecontactpopup from "./Updatecontactpopup";
 
-const Contactinfo = ({key, firstname, lastname, email, photo, mobile,setData }) => {
+const Contactinfo = ({id, firstname, lastname, email, photo, mobile,setData }) => {
 
   const [clicked, setClicked] = useState(0);
   
@@ -12,12 +12,13 @@ const Contactinfo = ({key, firstname, lastname, email, photo, mobile,setData }) 
     const respose = await axios.get("http://localhost:5000/api/");
     setData(respose.data);
   }
+  console.log(id)
   useEffect(() => {
     fetchdata(); // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, [clicked])
 
   const handleDelete= async()=>{
-    const respose = await axios.delete(`http://localhost:5000/api/${key}`)
+    const respose = await axios.delete(`http://localhost:5000/api/${id}`)
     setClicked(clicked+1)
     alert(respose.data)    
   }

@@ -1,105 +1,83 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-const Updatecontactpopup = ({title}) => {
-    const [firstname, setFirstname] = useState();
-    const [lastname, setLastname] = useState();
-    const [email, setEmail] = useState();
-    const [photo, setPhoto] = useState();
-    console.log(firstname , " " ,lastname , " " ,email)
-    
+const Updatecontactpopup = ({ title }) => {
+  const [firstname, setFirstname] = useState();
+  const [lastname, setLastname] = useState();
+  const [email, setEmail] = useState();
+  const [photo, setPhoto] = useState();
+  // console.log(firstname, " ", lastname, " ", email);
+
   return (
     <>
-    <div
-          class="modal fade"
-          id="updateModel"
-          tabindex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-  <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                  {title}
-                </h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <form>
-                  <div class="row mb-3 ">
-                    <label class="col-sm-2 col-form-label ">
-                      Firstname
-                    </label>
-                    <div class="col-sm-10 ">
-                      <input
-                        type="text"
-                        class="form-control w-50 "
-                        value={firstname}
-                        onChange={(e)=>setFirstname(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label
-                      class="col-sm-2 col-form-label p-12"
-                    >
-                      Lastname
-                    </label>
-                    <div class="col-sm-10">
-                      <input
-                        type="text"
-                        class="form-control w-50"
-                        value={lastname}
-                        onChange={(e)=>setLastname(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label p-12" >
-                      Email
-                    </label>
-                    <div class="col-sm-10">
-                      <input
-                        type="email"
-                        class="form-control w-50"
-                        value={email}
-                        onChange={(e)=>setEmail(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label
-                      class="col-sm-2 col-form-label p-12"
-                    >
-                      Photo
-                    </label>
-                    <div class="col-sm-10">
-                      <input
-                        type="text"
-                        class="form-control w-50"
-                        value={photo}
-                        onChange={(e)=>setPhoto(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">                 
-                <button type="button" class="btn btn-primary">
-                  Update
-                </button>
-              </div>
+      <div
+        className="modal fade"
+        id="updateModel"
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                {title}
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
+            <div className="modal-body">
+              <form>
+              <div className="col-sm-10 my-2 ">
+                    <input
+                      type="text"
+                      className="form-control w-60 "
+                      value={firstname}
+                      placeholder="FirstName"
+                      required={true}
+                      onChange={(e) => setFirstname(e.target.value)}
+                    />                  
+                </div>                  
+                  <div className="col-sm-10 mb-2">
+                    <input
+                      type="text"
+                      className="form-control w-60"
+                      value={lastname}
+                      placeholder="LastName"
+                      required={true}
+                      onChange={(e) => setLastname(e.target.value)}
+                    />
+                </div>
+                  <div className="col-sm-10 mb-2">
+                    <input
+                      type="email"
+                      className="form-control w-60"
+                      value={email}
+                      placeholder="Email"
+                      required={true}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                </div>
+                  <div className="col-sm-10 mb-2">
+                    <input
+                      type="text"
+                      className="form-control w-60"
+                      value={photo}
+                      placeholder="Photo URL"
+                      onChange={(e) => setPhoto(e.target.value)}
+                    />
+                </div>
+                <button type="submit" className="btn btn-primary btn-block" >Submit</button>
+              </form>
+            </div>            
           </div>
-          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
-</>
-  )
-}
-
-export default Updatecontactpopup
+export default Updatecontactpopup;

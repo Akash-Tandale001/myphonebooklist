@@ -2,28 +2,30 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 const Addcontactpopup = ({ title,setData }) => {
-  const [firstname, setFirstname] = useState();
-  const [lastname, setLastname] = useState();
-  const [email, setEmail] = useState();
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
   const [photo, setPhoto] = useState("");
-  console.log(firstname, " ", lastname, " ", email);
   const [clicked, setClicked] = useState(0);
 
+ 
+
   const handleAdd = async (e) => {
-    e.preventdefault();
-    const respose = await axios.post("http://localhost:5000/api/", {
-      firstname: firstname,
-      lastname: lastname,
-      email: email,
-      photo: photo,
-    });
-    alert(respose.data);
-    setFirstname("");
-    setLastname("");
-    setEmail("");
-    setPhoto("");
-    setClicked(clicked + 1);
-    console.log("clicked");
+    try {
+      e.preventdefault();
+      const respose = await axios.post("http://localhost:5000/api/", {firstname,lastname,email,mobile,photo},
+      { headers: {'Content-Type': 'application/json' }});
+      alert(respose.data);
+      setFirstname("");
+      setLastname("");
+      setEmail("");
+      setPhoto("");
+      setClicked(clicked + 1);
+      console.log("clicked");
+    } catch (error) {
+      console.log(error);
+    }
   };
   const fetchdata=async()=>{
     const respose = await axios.get("http://localhost:5000/api/");
@@ -36,85 +38,79 @@ const Addcontactpopup = ({ title,setData }) => {
   return (
     <>
       <div
-        class="modal fade"
+        className="modal fade"
         id="exampleModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
                 {title}
               </h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
-              <form onSubmit={handleAdd}>
-                <div class="row mb-3 ">
-                  <label class="col-sm-2 col-form-label ">Firstname</label>
-                  <div class="col-sm-10 ">
+            <div className="modal-body">
+              <form onSubmit={handleAdd}>             
+                  <div className="col-sm-10 my-2 ">
                     <input
                       type="text"
-                      class="form-control w-50 "
+                      className="form-control w-60 "
                       value={firstname}
+                      placeholder="FirstName"
+                      required={true}
                       onChange={(e) => setFirstname(e.target.value)}
-                    />
-                  </div>
-                </div>
-                <div class="row mb-3 formcontent">
-                  <label class="col-sm-2 col-form-label p-12">Lastname</label>
-                  <div class="col-sm-10">
+                    />                  
+                </div>                  
+                  <div className="col-sm-10 mb-2">
                     <input
                       type="text"
-                      class="form-control w-50"
+                      className="form-control w-60"
                       value={lastname}
+                      placeholder="LastName"
+                      required={true}
                       onChange={(e) => setLastname(e.target.value)}
                     />
-                  </div>
                 </div>
-                <div class="row mb-3">
-                  <label htmlFor="inputEmail3" class="col-sm-2 col-form-label p-12">
-                    Email
-                  </label>
-                  <div class="col-sm-10">
+                  <div className="col-sm-10 mb-2">
                     <input
                       type="email"
-                      class="form-control w-50"
+                      className="form-control w-60"
                       value={email}
+                      placeholder="Email"
+                      required={true}
                       onChange={(e) => setEmail(e.target.value)}
                     />
-                  </div>
                 </div>
-                <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label p-12">Photo</label>
-                  <div class="col-sm-10">
+                <div className="col-sm-10 mb-2">
                     <input
                       type="text"
-                      class="form-control w-50"
+                      className="form-control w-60"
+                      value={mobile}
+                      placeholder="Mobile No."
+                      required={true}
+                      onChange={(e) => setMobile(e.target.value)}
+                    />
+                </div>
+                  <div className="col-sm-10 mb-2">
+                    <input
+                      type="text"
+                      className="form-control w-60"
                       value={photo}
+                      placeholder="Photo URL"
                       onChange={(e) => setPhoto(e.target.value)}
                     />
-                  </div>
                 </div>
-                <input type="submit" class="btn btn-primary" value="Submit"/>
+                <button type="submit" className="btn btn-primary btn-block" >Submit</button>
               </form>
-            </div>
-            <div class="modal-footer">
-              {/* <button
-                type="button"
-                class="btn btn-primary"
-                
-              >Submit
-              </button> */}
-                {/* <input type="submit" class="btn btn-primary" value="Submit"/> */}
-            </div>
+            </div>           
           </div>
         </div>
       </div>
