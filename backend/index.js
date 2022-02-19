@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === 'production') {
       )
     )
   } else {
-    app.get('/', (req, res) => res.send('Please set production'))
+    app.get('/', (req, res) => res.send('Please set  production'))
   }
 
 
